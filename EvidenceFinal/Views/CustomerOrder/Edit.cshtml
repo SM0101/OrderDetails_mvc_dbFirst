@@ -1,0 +1,43 @@
+﻿@model EvidenceFinal.Models.ViewModels.CustOrdVM
+
+@using (Html.BeginForm("Edit", "Customers", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Customer.CustomerID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.CutomerName)
+        @Html.TextBoxFor(model => model.Customer.CutomerName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.BillingAddress)
+        @Html.TextBoxFor(model => model.Customer.BillingAddress, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.Imagepath)
+        @Html.TextBoxFor(model => model.Customer.Imagepath, new { @class = "form-control" })
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order No</th>
+                <th>Order Date</th>
+                <th>Order Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@Html.TextBoxFor(model => order.OrderNo, new { @class = "form-control" })</td>
+                    <td>@Html.EditorFor(model => order.orderDate, new { @class = "form-control" })</td>
+                    <td>@Html.EditorFor(model => order.OrderStatus)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
